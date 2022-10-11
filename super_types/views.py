@@ -6,6 +6,7 @@ from .models import SuperType
 
 @api_view(['GET'])
 def super_types_list(request):
-
-
-    return Response('ok')
+    if request.method == 'GET':
+        super_types = SuperType.objects.all()
+        serializer = SuperTypeSerializer(super_types, many=True)
+        return Response(serializer.data)
